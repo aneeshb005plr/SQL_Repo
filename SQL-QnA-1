@@ -157,6 +157,45 @@ Return the result table in any order.
 
 Ans:  select s.product_id, p.product_name from product p inner join sales s on p.product_id = s.product_id where s.sale_date between '2019-01-01' and '2019-03-31' and s.product_id not in
  (select product_id from  sales where sale_date not between '2019-01-01' and '2019-03-31')
+ 
+# create table called views and insert records
+ create table views (
+article_id int,
+author_id int,
+viewer_id int,
+view_date date
+);
+insert into views values(1,3,5,'2019-08-01'),
+(1,3,6,'2019-08-02'),
+(2,7,7,'2019-08-01'),
+(2,7,6,'2019-08-02'),
+(4,7,1,'2019-07-22'),
+(3,4,4,'2019-07-21'),
+(3,4,4,'2019-07-21');
+
+Q18 : Write an SQL query to find all the authors that viewed at least one of their own articles.
+Return the result table sorted by id in ascending order.
+Ans: select distinct(t1.author_id) from views t1 inner join views t2 on t1.author_id = t2.viewer_id order by t1.author_id; 
+
+# create table called delivery and insert records
+
+create table delivery (
+delivery_id int,
+customer_id int,
+order_date date,
+customer_pref_delivery_date date,
+constraint pk primary key(delivery_id)
+);
+
+insert into delivery values
+(1,1,'2019-08-01','2019-08-02'),
+(2,5,'2019-08-02','2019-08-02'),
+(3,1,'2019-08-11','2019-08-11'),
+(4,3,'2019-08-24','2019-08-26'),
+(5,4,'2019-08-21','2019-08-22'),
+(6,2,'2019-08-11','2019-08-13');
+
+
 
 
 
