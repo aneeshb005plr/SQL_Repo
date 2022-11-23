@@ -229,6 +229,24 @@ tie.
 Ans: select * from (select ad_id, trim(ifnull(round((sum(case when action=1 then 1 else 0 end)/(sum(case when action=1 then 1 else 0 end)+sum(case when action=2 then 1 else 0 end)))*100,2),0))+0 as 'ctr' 
    from ads group by ad_id) t1 order by t1.ctr desc;
 
+# create a table called employee and insert record
 
+create table employee
+(
+employee_id int primary key,
+team_id int
+);
+
+insert into employee values
+(1,8),
+(2,8),
+(3,8),
+(4,7),
+(5,9),
+(6,9);
+
+Q21. Write an SQL query to find the team size of each of the employees.
+Return result table in any order
+Ans: select employee_id, count(team_id) over (partition by team_id) as 'team size' from employee order by employee_id;
 
 
